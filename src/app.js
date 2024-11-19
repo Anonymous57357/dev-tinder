@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -6,18 +7,31 @@ const { connectDB } = require("./config/database");
 
 const User = require("./models/user");
 
+const { validateSignupData } = require("./utils/validation");
+
+// const {hashedPassword} = require("./")
+
 app.use(express.json());
 
 // signup user
-app.post("/signup", async (req, res, next) => {
-  const user = req.body;
-
+app.post("/signup", async (req, res) => {
   try {
-    const userObj = new User(user);
+    const { firstName, lastName, emailId, password } = req.body;
 
-    if (user.age < 18) {
-      throw new Error("minimum age required");
-    } 
+    // Validation of data
+    validateSignupData(req);
+
+    // encrypting the pasword
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+
+    // creating a new instance of the User model
+    const userObj = new User({
+      firstName: firstName,
+      lastName: lastName,
+      emailId: emailId,
+      password: hashedPassword,
+    });
 
     await userObj.save();
     res
@@ -28,6 +42,37 @@ app.post("/signup", async (req, res, next) => {
   }
 });
 
+// loging user
+app.post("/login", async (req, res) => {
+  try {
+    const { emailId, password } = req.body;
+
+    // Ensure the body contains the emailId and password
+    if (!emailId || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    // Check if the user exists
+    const user = await User.findOne({ emailId: emailId }); 
+    if (!user) {
+      return res.status(401).json({ error: "Invalid Credentials" });
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (isValidPassword) {
+      return res.status(200).json({
+        message: "User logged in successfully",
+        data: user,
+      });
+    } else {
+      return res.status(401).json({ error: "Invalid Credentials" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 // User API - GET user by email
 app.get("/user", async (req, res, next) => {
   const users = await User.findOne(req.body.email).exec();
