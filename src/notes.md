@@ -14,7 +14,7 @@
 - just send the dummy cookie to the user
 - create GET /profile api if you get the cookie back
 - istall jsonwebtoken
-- In login API, after Email and password validation, create a JWT token and send back to the browser (cookies)  
+- In login API, after Email and password validation, create a JWT token and send back to the browser (cookies)
 - read the cookies inside the profile API and find which user logge in
 - userAuth Middleware
 - Add the userAuth Middleware to the profile API and sendConnectonRequest API
@@ -28,3 +28,8 @@
 - Read Documentation for express.Router()
 - Create authRouter, profileRouter, requestRouter
 - import these routers in app.js
+- Create POST /logout API
+- Create PATCH /profile/edit
+- Create PATCH /profile/password API => forgot passwrod API
+- make sure validate all the data form POST, PATCH apis
+    

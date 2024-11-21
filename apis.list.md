@@ -3,12 +3,13 @@
 ## authRouter
 - POST /signup .
 - LOGIN /login .
-- LOGOUT /logout
+- LOGOUT /logout .
 
 ## profileRouter
 - POST /profile/view .
-- POST /profile/edit
-- POST /profile/delete
+- PATCH /profile/edit .
+- PATCH /profile/password 
+
 
 ## sendConnectionRouter
 - POST /request/send/interested/:userId

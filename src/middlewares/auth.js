@@ -5,9 +5,11 @@ const User = require("../models/user");
 exports.userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
+    if (!token) {
+      throw new Error("invalid token");
+    }
 
     const decodedMessage = await jwt.verify(token, "dev@tinder#$123456");
-    console.log(decodedMessage);
 
     const { _id } = decodedMessage;
 
