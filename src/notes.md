@@ -32,4 +32,13 @@
 - Create PATCH /profile/edit
 - Create PATCH /profile/password API => forgot passwrod API
 - make sure validate all the data form POST, PATCH apis
-    
+- Create a Connection Reqest Schema
+- send connection request to API ?
+- proper validation of data
+- think about the all corner cases
+- $or and $and query go through and read
+- schema.pre("save", function () {})
+- what is compound index in mongodb ?
+- why do we need mongo DB ?
+- What is the advantage of disadvantages of mongo DB ?
+- Reat a article about the compound index https://www.mongodb.com/docs/manual/core/indexes/index-types/index-compound/

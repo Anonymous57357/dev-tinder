@@ -22,4 +22,4 @@
 - GET /user/requests
 - GET /feed - Gets your profiles to other users platform
 
-status: ignore, interested, accedpted, rejected
+status: ignore, interested, accepted, rejected
