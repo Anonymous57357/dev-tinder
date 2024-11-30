@@ -32,6 +32,7 @@
 - Create PATCH /profile/edit
 - Create PATCH /profile/password API => forgot passwrod API
 - make sure validate all the data form POST, PATCH apis
+
 - Create a Connection Reqest Schema
 - send connection request to API ?
 - proper validation of data
@@ -42,3 +43,9 @@
 - why do we need mongo DB ?
 - What is the advantage of disadvantages of mongo DB ?
 - Reat a article about the compound index https://www.mongodb.com/docs/manual/core/indexes/index-types/index-compound/
+- Always think about corner cases
+
+- wite code with proper validation for POST /request/review/:status/:requestId
+- thought process fo GET vs POST 
+
+# S02 E13 Ref, Populate & Thought process of writing APIs -- NEED TO TEST API
