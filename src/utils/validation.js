@@ -34,4 +34,12 @@ const validateEditProfileData = (req) => {
 
   return isEditAllowed;
 };
-module.exports = { validateSignupData, validateEditProfileData };
+
+const validatePassword = (password) => {
+  return password && password.length >= 8;
+};
+module.exports = {
+  validateSignupData,
+  validateEditProfileData,
+  validatePassword,
+};

@@ -85,14 +85,18 @@ requestsRouter.post(
       });
 
       if (!connectionRequest) {
-        res.status(404).json({ message: "Connection request not found" });
+        return res
+          .status(404)
+          .json({ message: "Connection request not found" });
       }
 
       connectionRequest.status = status;
 
       const data = await connectionRequest.save();
 
-      res.status(200).json({ message: "Connection request" + status, data });
+      return res
+        .status(200)
+        .json({ message: "Connection request" + status, data });
     } catch (error) {
       res.status(400).json({ message: `ERROR: ${error}` });
     }

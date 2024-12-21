@@ -46,6 +46,17 @@
 - Always think about corner cases
 
 - wite code with proper validation for POST /request/review/:status/:requestId
-- thought process fo GET vs POST 
+- thought process fo GET vs POST
 
 # S02 E13 Ref, Populate & Thought process of writing APIs -- NEED TO TEST API
+
+# logic for GET /feed API
+
+- explore all the mongodb opereator $or, $and , $ne and $nin
+
+# paginnation (feature)
+
+/feed?page=1&limit=10 => 1 - 10 => skip(0) & .limit(10)
+/feed?page=2&limit=10 => 11 - 20 => skip(10) & .limit(10)
+/feed?page=3&limit=10 => 21 - 30 => skip(20) & .limit(10)
+  

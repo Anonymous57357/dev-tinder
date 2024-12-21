@@ -3,9 +3,13 @@ const express = require("express");
 const profileRouter = express.Router();
 
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const { userAuth } = require("../middlewares/auth");
-const { validateEditProfileData } = require("../utils/validation");
+const {
+  validateEditProfileData,
+  validatePassword,
+} = require("../utils/validation");
 
 profileRouter.get("/profile", userAuth, async (req, res, next) => {
   try {
@@ -40,12 +44,13 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res, next) => {
   }
 });
 
-profileRouter.patch("/profile/password", userAuth, async (req, res, next) => {
+profileRouter.patch("/profile/password", userAuth, async (req, res) => {
   try {
-  
-    console.log(req.user);
+    res.status(200).json({
+      message: "Password updated successfully",
+    });
   } catch (error) {
-    res.status(400).json({ message: `ERROR: ${err}` });
+    res.status(400).json({ message: `ERROR: ${error.message}` });
   }
 });
 
