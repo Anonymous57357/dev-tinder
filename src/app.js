@@ -20,8 +20,11 @@ app.use("/", userRouter);
 connectDB()
   .then((res) => {
     console.log("database connection succesfull......");
-    app.listen(8000, () => console.log("server is listening on PORT 8000"));
+    app.listen(8001, () => console.log("server is listening on PORT 8000"));
   })
   .catch((err) => {
     console.error("database not connected");
   });
+
+
+  // DEVTINDER FRONTEND
