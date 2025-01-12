@@ -26,6 +26,20 @@ authRouter.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
 
+    const savedUser = await userObj;
+
+    const token = await savedUser.getJWT();
+    console.log(token);
+
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+      path: "/", // Make cookie accessible across the app
+    };
+    res.cookie("cookies_token", token, cookieOptions);
+
     await userObj.save();
     res
       .status(200)
@@ -54,10 +68,19 @@ authRouter.post("/login", async (req, res) => {
       const token = await user.getJWT();
       console.log(token);
 
-      res.cookie("token", token);
+      const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+        path: "/", // Make cookie accessible across the app
+      };
+
+      res.cookie("cookies_token", token, cookieOptions);
 
       return res.status(200).json({
         message: "User logged in successfully",
+        token,
         data: user,
       });
     } else {
@@ -70,7 +93,7 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/logout", (req, res, next) => {
-  res.cookie("token", null, { expires: new Date(Date.now() + 900000) });
+  res.cookie("cookies_token", null, { expires: new Date(Date.now() + 900000) });
   res.status(200).json({ message: "user logged out sucessfully" });
 });
 

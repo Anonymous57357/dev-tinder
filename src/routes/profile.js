@@ -6,22 +6,19 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 const { userAuth } = require("../middlewares/auth");
-const {
-  validateEditProfileData,
-  validatePassword,
-} = require("../utils/validation");
+const { validateEditProfileData } = require("../utils/validation");
 
-profileRouter.get("/profile", userAuth, async (req, res, next) => {
+profileRouter.get("/profile/view", userAuth, async (req, res, next) => {
   try {
     const user = req.user;
 
-    res.status(200).json({ user });
+    res.status(200).json({ data: user });
   } catch (err) {
     res.status(400).json({ message: `ERROR: ${err}` });
   }
 });
 
-profileRouter.patch("/profile/edit", userAuth, async (req, res, next) => {
+profileRouter.post("/profile/edit", userAuth, async (req, res, next) => {
   try {
     if (!validateEditProfileData(req)) {
       throw new Error("Invalid edit Request");
