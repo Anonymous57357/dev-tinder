@@ -13,6 +13,7 @@ app.use(
     credentials: true, // Allow cookies and headers
     secure: process.env.NODE_ENV === "production", // Use secure cookies in production
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    sameSite: "None", // Allow cross-site cookies
     allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
