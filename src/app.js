@@ -9,11 +9,12 @@ const { connectDB } = require("./config/database");
 
 app.use(
   cors({
-    origin: "*", // Allow only your frontend URL
+    origin: "http://localhost:5173", // Allow only your frontend URL
     credentials: true, // Allow cookies and headers
     secure: process.env.NODE_ENV === "production", // Use secure cookies in production
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
     sameSite: "None", // Allow cross-site cookies
+
     allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
