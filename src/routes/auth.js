@@ -34,6 +34,7 @@ authRouter.post("/signup", async (req, res) => {
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
       path: "/", // Make cookie accessible across the app
     };
@@ -70,6 +71,7 @@ authRouter.post("/login", async (req, res) => {
       const cookieOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+        sameSite: "None",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         path: "/", // Make cookie accessible across the app
       };
