@@ -92,9 +92,19 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-authRouter.post("/logout", (req, res, next) => {
-  res.cookie("cookies_token", null, { expires: new Date(Date.now() + 900000) });
-  res.status(200).json({ message: "user logged out sucessfully" });
+// authRouter.post("/logout", (req, res, next) => {
+//   res.cookie("cookies_token", null, { expires: new Date(Date.now() + 900000) });
+//   res.status(200).json({ message: "user logged out sucessfully" });
+// });
+
+authRouter.post("/logout", (req, res) => {
+  res.cookie("cookies_token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "None",
+    expires: new Date(0), // Expire the cookie immediately
+  });
+  res.status(200).json({ message: "User logged out successfully" });
 });
 
 module.exports = authRouter;
