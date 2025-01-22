@@ -70,10 +70,10 @@ authRouter.post("/login", async (req, res) => {
 
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        sameSite: "None",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
-        path: "/", // Make cookie accessible across the app
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        path: "/",
       };
 
       res.cookie("cookies_token", token, cookieOptions);
