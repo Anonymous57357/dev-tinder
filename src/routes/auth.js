@@ -34,13 +34,12 @@ authRouter.post("/signup", async (req, res) => {
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
+      sameSite: process.env.NODE_ENV === "production" ? "Lax" : "None", // Cross-site cookies in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
       path: "/", // Accessible across the app
     };
-    
+
     res.cookie("cookies_token", token, cookieOptions);
-    
 
     await userObj.save();
     res
