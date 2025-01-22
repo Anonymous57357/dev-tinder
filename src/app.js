@@ -7,13 +7,16 @@ require("dotenv").config();
 const app = express();
 const { connectDB } = require("./config/database");
 
+// Dynamic CORS configuration based on the environment
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow only your frontend URL
-    credentials: true, // Allow cookies and headers
-    secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://your-deployed-frontend-url.netlify.app" // Deployed frontend URL
+        : "http://localhost:5173", // Local frontend URL
+    credentials: true, // Allow credentials (cookies, headers)
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
 );
 
@@ -35,7 +38,7 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8001;
 
 connectDB()
   .then((res) => {
