@@ -42,7 +42,6 @@ const PORT = process.env.PORT || 8001;
 
 connectDB()
   .then((res) => {
-    console.log("database connection succesfull......");
     app.listen(PORT, () => console.log("server is listening on PORT 8000"));
   })
   .catch((err) => {
