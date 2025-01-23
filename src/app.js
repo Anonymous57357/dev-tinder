@@ -12,7 +12,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://your-deployed-frontend-url.netlify.app" // Deployed frontend URL
+        ? "https://techtinder.netlify.app/" // Deployed frontend URL
         : "http://localhost:5173", // Local frontend URL
     credentials: true, // Allow credentials (cookies, headers)
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
@@ -27,7 +27,6 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/requests");
 const userRouter = require("./routes/user");
-
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
