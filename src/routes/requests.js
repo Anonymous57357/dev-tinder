@@ -88,7 +88,7 @@ requestsRouter.post(
         return res
           .status(404)
           .json({ message: "Connection request not found" });
-      }
+      } 
 
       connectionRequest.status = status;
 
