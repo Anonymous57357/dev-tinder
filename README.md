@@ -28,4 +28,8 @@
       --> Enable port : 80 of your instance   
 
    Backend: 
-      -->
+      -->   
+
+      ## nginx
+      1. uses reverse proxy - load balancing -> handles al the post
+      2. its excepsts only a domain name based on port its automatically maped to that user`
