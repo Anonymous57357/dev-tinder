@@ -33,8 +33,10 @@ authRouter.post("/signup", async (req, res) => {
 
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
+      // secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      // sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
+      secure: true,
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
       path: "/", // Accessible across the app
     };
@@ -71,8 +73,10 @@ authRouter.post("/login", async (req, res) => {
 
       const cookieOptions = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
+        // secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+        // sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
+        secure: true,
+        sameSite: "None",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         path: "/", // Accessible across the app
       };
@@ -97,7 +101,8 @@ authRouter.post("/login", async (req, res) => {
 authRouter.post("/logout", (req, res) => {
   res.cookie("cookies_token", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "None",
     expires: new Date(0), // Expire the cookie immediately
   });
