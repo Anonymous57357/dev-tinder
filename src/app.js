@@ -12,7 +12,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://techtinder.netlify.app/" // Deployed frontend URL
+        ? "http://13.60.215.91/" // Deployed frontend URL
         : "http://localhost:5173", // Local frontend URL
     credentials: true, // Allow credentials (cookies, headers)
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods

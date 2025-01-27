@@ -4,11 +4,14 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const connectionString = process.env.MONOGODB_CONNECTION_STRING;
-    const dbName = process.env.DB_NAME;
+    const connectionString =
+      "mongodb+srv://mukesh:mukesh@database.4u0of.mongodb.net/";
+    const dbName = "devtinder-db";
 
     if (!connectionString || !dbName) {
-      throw new Error("Environment variables MONOGODB_CONNECTION_STRING or DB_NAME are not defined.");
+      throw new Error(
+        "Environment variables MONOGODB_CONNECTION_STRING or DB_NAME are not defined."
+      );
     }
 
     await mongoose.connect(connectionString, {

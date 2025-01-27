@@ -6,7 +6,7 @@
 
 ## GDL Namaste Node JS S03
 
-#  S03E01 Launching a AWS Instance and deploying frontend
+# S03E02 Nginx & Backend Node App Deployment
 
 # Deployment
 
