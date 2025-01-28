@@ -31,15 +31,9 @@ authRouter.post("/signup", async (req, res) => {
     const token = await savedUser.getJWT();
     console.log(token);
 
-    const cookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
-      path: "/", // Accessible across the app
-    };
-
-    res.cookie("cookies_token", token, cookieOptions);
+    res.cookie("cookies_token", token, {
+      expires: new Date(Date.now() + 8 * 3600000),
+    });
 
     await userObj.save();
     res
@@ -69,20 +63,14 @@ authRouter.post("/login", async (req, res) => {
       const token = await user.getJWT();
       console.log(token);
 
-      const cookieOptions = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Cross-site cookies in production
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
-        path: "/", // Accessible across the app
-      };
-      res.cookie("cookies_token", token, cookieOptions);
+      res.cookie("cookies_token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+      });
 
       console.log(user);
 
       return res.status(200).json({
         message: "User logged in successfully",
-        token,
         data: user,
       });
     } else {
@@ -95,11 +83,8 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/logout", (req, res) => {
-  res.cookie("cookies_token", "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "None",
-    expires: new Date(0), // Expire the cookie immediately
+  res.cookie("cookies_token", null, {
+    expires: new Date(Date.now()), // Expire the cookie immediately
   });
   res.status(200).json({ message: "User logged out successfully" });
 });

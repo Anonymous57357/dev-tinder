@@ -10,10 +10,7 @@ const { connectDB } = require("./config/database");
 // Dynamic CORS configuration based on the environment
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "http://13.60.215.91/" // Deployed frontend URL
-        : "http://localhost:5173", // Local frontend URL
+    origin: "http://localhost:5173", // Local frontend URL
     credentials: true, // Allow credentials (cookies, headers)
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
