@@ -1,12 +1,10 @@
-require("dotenv").config(); // Load environment variables from .env
-
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const connectionString =
-      "mongodb+srv://mukesh:mukesh@database.4u0of.mongodb.net/";
-    const dbName = "devtinder-db";
+    const connectionString = process.env.MONOGODB_CONNECTION_STRING;
+
+    const dbName = process.env.DB_NAME;
 
     if (!connectionString || !dbName) {
       throw new Error(
@@ -15,7 +13,7 @@ const connectDB = async () => {
     }
 
     await mongoose.connect(connectionString, {
-      dbName, // Use the database name from the environment variable
+      dbName, 
     });
 
     console.log("Connected to MongoDB successfully");

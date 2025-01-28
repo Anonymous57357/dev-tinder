@@ -78,9 +78,10 @@ proxy_set_header Host $host;
 proxy_cache_bypass $http_upgrade;
 }
 
-      ## nginx
-      1. uses reverse proxy - load balancing -> handles al the post
-      2. its excepsts only a domain name based on port its automatically maped to that user`
+## nginx
+
+1. uses reverse proxy - load balancing -> handles al the post
+2. its excepsts only a domain name based on port its automatically maped to that user`
 
 => sudo nginx -t
 => sudo systemctl reload nginx
@@ -88,5 +89,8 @@ proxy_cache_bypass $http_upgrade;
 
 frontend take first ip addres / backend in second
 
-
 -> whenever the changes happe in the frontend make sure create a new build and copy and push to nginx server
+
+## chrome dev tools
+
+## cookies section

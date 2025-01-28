@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// require("dotenv").config();
+require("dotenv").config();
 
 const app = express();
 const { connectDB } = require("./config/database");
@@ -35,7 +35,7 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 connectDB()
   .then((res) => {
